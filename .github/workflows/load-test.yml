@@ -1,17 +1,21 @@
-
 name: k6 Load Test
-on: 
+on:
   push:
-    branches: [ master ]
-    pull_request: [ master ]  
+    branches: [master]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Run local k6 test
-      uses: grafana/k6-action@v0.2.0
-      with:
-        filename: ./pruebas/script.js
-
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Run local k6 test
+        uses: grafana/k6-action@v0.2.0
+        with:
+          filename: ./pruebas/script.js
+      - name: Copy test report
+        run: cp ./resultados/test-report.html $GITHUB_WORKSPACE/test-report.html
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          path: $GITHUB_WORKSPACE/test-report.html
