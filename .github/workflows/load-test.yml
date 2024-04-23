@@ -21,4 +21,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test-report
-          path: $GITHUB_WORKSPACE/test-report.html
+          path: ${{ github.workspace }}/test-report.html
