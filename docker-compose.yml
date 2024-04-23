@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  k6:
+    image: grafana/k6
+    volumes:
+      - ./pruebas:/pruebas
+      - ./resultados:/resultados
+    command: run --out web-dashboard=export=/resultados/test-report.html /pruebas/script.js
