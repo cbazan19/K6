@@ -14,7 +14,10 @@ jobs:
           filename: ./pruebas/script.js
       - name: Copy test report
         run: cp ./resultados/test-report.html $GITHUB_WORKSPACE/test-report.html
+      - name: Verify test report
+        run: ls $GITHUB_WORKSPACE/test-report.html
       - name: Upload test report
+        if: success()
         uses: actions/upload-artifact@v2
         with:
           name: test-report
